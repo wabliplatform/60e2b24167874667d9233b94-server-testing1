@@ -1,6 +1,4 @@
-const post = require('./post');
-const post_postImage = require('./post_postImage');
+const person = require('./person');
 
 module.exports = {
-  post,
-  post_postImage};
+  person};

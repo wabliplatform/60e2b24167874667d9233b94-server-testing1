@@ -1,5 +1,5 @@
-const PostService = require('./PostService');
+const PersonService = require('./PersonService');
 
 module.exports = {
-  PostService,
+  PersonService,
 };

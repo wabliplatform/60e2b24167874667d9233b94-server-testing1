@@ -19,16 +19,16 @@ security:
 - {}
 tags:
 - description: not yet ready
-  name: post
+  name: person
 paths:
-  /post:
+  /person:
     post:
-      operationId: createpost
+      operationId: createperson
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/post'
+              $ref: '#/components/schemas/person'
         description: data to be created
         required: true
       responses:
@@ -36,20 +36,20 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/post'
+                $ref: '#/components/schemas/person'
           description: successful operation
       summary: Creates the data
       tags:
-      - post
-      x-eov-operation-handler: controllers/PostController
-  /post/{postId}:
+      - person
+      x-eov-operation-handler: controllers/PersonController
+  /person/{personId}:
     delete:
-      operationId: deletepost
+      operationId: deleteperson
       parameters:
       - description: the Id parameter
         explode: false
         in: path
-        name: postId
+        name: personId
         required: true
         schema:
           type: string
@@ -59,15 +59,15 @@ paths:
           description: successful operation
       summary: Delete the element
       tags:
-      - post
-      x-eov-operation-handler: controllers/PostController
+      - person
+      x-eov-operation-handler: controllers/PersonController
     get:
-      operationId: getpost
+      operationId: getperson
       parameters:
       - description: the Id parameter
         explode: false
         in: path
-        name: postId
+        name: personId
         required: true
         schema:
           type: string
@@ -77,19 +77,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/post'
+                $ref: '#/components/schemas/person'
           description: successful operation
       summary: Get the element
       tags:
-      - post
-      x-eov-operation-handler: controllers/PostController
+      - person
+      x-eov-operation-handler: controllers/PersonController
     put:
-      operationId: updatepost
+      operationId: updateperson
       parameters:
       - description: the Id parameter
         explode: false
         in: path
-        name: postId
+        name: personId
         required: true
         schema:
           type: string
@@ -98,102 +98,81 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/post'
+              $ref: '#/components/schemas/person'
         description: data to be updated
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/post'
+                $ref: '#/components/schemas/person'
           description: successful operation
       summary: Updates the element
       tags:
-      - post
-      x-eov-operation-handler: controllers/PostController
-  /post/getAll:
+      - person
+      x-eov-operation-handler: controllers/PersonController
+  /person/getAll:
     get:
-      operationId: getAllpost
+      operationId: getAllperson
       responses:
         "200":
           content:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/post'
+                  $ref: '#/components/schemas/person'
                 type: array
           description: successful operation
       summary: Get all the data
       tags:
-      - post
+      - person
       x-method-getAll: "true"
-      x-eov-operation-handler: controllers/PostController
-  /post/getByParams/{attribute}/{value}:
+      x-eov-operation-handler: controllers/PersonController
+  /person/getByParams:
     get:
-      operationId: getByParamspost
+      operationId: getByParamsperson
       parameters:
-      - description: the attribute based on which the search is performed
-        explode: false
-        in: path
-        name: attribute
+      - description: the query based on which the search is performed
+        explode: true
+        in: query
+        name: filter
         required: true
         schema:
           type: string
-        style: simple
-      - description: the value parameter based on which the search is performed
-        explode: false
-        in: path
-        name: value
-        required: true
-        schema:
-          type: string
-        style: simple
+        style: form
       responses:
         "200":
           content:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/post'
+                  $ref: '#/components/schemas/person'
                 type: array
           description: successful operation
       summary: Get all the data based on user query
       tags:
-      - post
+      - person
       x-method-get-by-params: "true"
-      x-eov-operation-handler: controllers/PostController
+      x-eov-operation-handler: controllers/PersonController
 components:
   schemas:
-    post:
+    person:
       example:
-        postImage:
-          data: data
-          name: name
-        postDesc: postDesc
-        postTitle: postTitle
+        fname: fname
+        lname: lname
+        cname: cname
         _id: _id
       properties:
         _id:
           type: string
-        postImage:
-          $ref: '#/components/schemas/post_postImage'
-        postTitle:
+        fname:
           type: string
-        postDesc:
+        lname:
+          type: string
+        cname:
           type: string
       required:
-      - postDesc
-      - postImage
-      - postTitle
+      - cname
+      - fname
+      - lname
       type: object
-    post_postImage:
-      example:
-        data: data
-        name: name
-      properties:
-        data:
-          type: string
-        name:
-          type: string
-      type: object
-      x-isSchemaOnly: "true"
